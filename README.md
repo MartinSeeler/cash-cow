@@ -1,2 +1,5 @@
-# cashcow
-A forex library for Scala
+# Cash Cow
+
+A forex library for Scala.
+
+
