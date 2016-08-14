@@ -5,7 +5,7 @@ import Prop._
 import com.martinseeler.cashcow.Price._
 import shapeless.tag.@@
 
-object PriceSpecification extends Properties("Price") {
+object PriceSpec extends Properties("Price") {
 
   property("fromInt") = forAll { x: Int =>
     val p: Price = x

@@ -47,9 +47,8 @@ object AsPrice {
     def asPrice(x: Double): Price = Price(x)
   }
 
-  implicit val bigDecimalToPrice: AsPrice[BigDecimal] =
-    new AsPrice[BigDecimal] {
-      def asPrice(x: BigDecimal): Price = Price(x)
-    }
+  implicit val bigDecimalToPrice: AsPrice[BigDecimal] = new AsPrice[BigDecimal] {
+    def asPrice(x: BigDecimal): Price = Price(x)
+  }
 
 }
