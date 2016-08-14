@@ -1,0 +1,28 @@
+language: scala
+sudo: false
+jdk:
+- oraclejdk8
+scala:
+- 2.11.7
+- 2.11.8
+cache:
+  directories:
+  - "$HOME/.m2/repository"
+  - "$HOME/.ivy2/cache"
+  - "$HOME/.sbt/boot/"
+  - "$HOME/.sbt/launchers/"
+script:
+- sbt ++$TRAVIS_SCALA_VERSION travis
+- find $HOME/.sbt -name "*.lock" | xargs rm
+- find $HOME/.ivy2 -name "ivydata-*.properties" | xargs rm
+before_install:
+- pip install --user codecov
+after_success:
+- sbt coverageReport coveralls
+notifications:
+  slack:
+    rooms:
+      secure: HyILpl0tw1/2UqFudDfoqXISBxHMWpKfnie+XyPaS9lnuLcMCtY0u42kP60zzLru2TcgDeJGgND6sDGpRdMlSbZIRMOSZW+GjNm9q/JzOSgDjNJ6MG+nM+E69UCWSmYnEUle/i9XkKqFUAlWIkAOnnGwIV78M2/XHE9QW04D1NMQ271M5oT2huU4E3QdtCnlVCZzt7L5Hjx4lmC+yupFQsQa2IzrSFteh36KCu68J0UCjKbuCXb6Sempl7URQGHPajwzHFEly5FrelybOjPkUNsZyV3G6rtqYcgj24Ob55z/o5lOGKpliG6RVpeGOtw3BwblUq93HvzKiZYgHST5B7Gxxg0fyoS5h0ZFohfpefJ0PCPN79Th/Np34foEIkHUHrHPxLSjhXp6O7dtykhyCdhTMzd2UgJCRxB+mbZuFBUub2/QZJmHIQX0tzRy7OTkFQq6Cr7J08KujeiC4dZN7+P8f1L8rZfFS8Y+y2hpyElybEbMXbABtIJSFmrMubrZLwreD5arSEpG24Qz40P5ACqkoAZqGgnVA6ytxl4ko5FIl6uVia9JE0qbPnOQSCjW/8NtDdIqvDdcH1RS55xcbJNyn3cMWA3AJrpvBEev3ncMN23qh5Rx5QuJoVxZVf1A98VuT6PSZvSwboWWY39R4ZHhMr+SGr1wbCKXB+/U3GY=
+    on_success: always
+    on_failure: always
+    on_start: always
