@@ -1,4 +1,4 @@
-package com.martinseeler.cashcow
+package cashcow
 
 import shapeless.tag
 import shapeless.tag._

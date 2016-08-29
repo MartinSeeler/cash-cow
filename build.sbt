@@ -12,4 +12,8 @@ lazy val `core` = project in new File("core") settings(
     "org.scalatest"   %% "scalatest"    % "2.2.6"   % "test"
   ))
 
+lazy val docs = project in new File("docs") dependsOn core settings(
+//  tutsSettings(core)
+)
+
 addCommandAlias("travis", ";clean;coverage;testOnly;coverageReport;coverageAggregate")

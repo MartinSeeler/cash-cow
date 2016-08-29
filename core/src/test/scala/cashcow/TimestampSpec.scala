@@ -1,6 +1,6 @@
-package com.martinseeler.cashcow
+package cashcow
 
-import com.martinseeler.cashcow.Timestamp._
+import cashcow.Timestamp._
 import org.scalacheck.Prop._
 import org.scalacheck._
 import org.scalatest.Matchers

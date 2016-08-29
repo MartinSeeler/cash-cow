@@ -1,6 +1,4 @@
-package com.martinseeler
-
-import com.martinseeler.cashcow.Price._
+import cashcow.Price.{Ask, Bid}
 import shapeless.tag.@@
 
 package object cashcow {

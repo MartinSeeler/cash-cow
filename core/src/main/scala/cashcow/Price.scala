@@ -1,4 +1,4 @@
-package com.martinseeler.cashcow
+package cashcow
 
 import shapeless.tag
 import shapeless.tag.@@
@@ -11,14 +11,12 @@ object Price {
   val bid = tag[Bid]
   object Bid {
     implicit def asPrice[A](x: A)(implicit A: AsPrice[A]): Price @@ Bid = Price.bid(A.asPrice(x))
-    def asAskPrice(x: Price @@ Bid): Price @@ Ask = Price.ask(x.value)
   }
 
   sealed trait Ask
   val ask = tag[Ask]
   object Ask {
     implicit def asPrice[A](x: A)(implicit A: AsPrice[A]): Price @@ Ask = Price.ask(A.asPrice(x))
-    def asBidPrice(x: Price @@ Ask): Price @@ Bid = Price.bid(x.value)
   }
 
   implicit def asPrice[A](x: A)(implicit A: AsPrice[A]): Price = A.asPrice(x)

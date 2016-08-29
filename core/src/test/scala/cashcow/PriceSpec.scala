@@ -1,11 +1,12 @@
-package com.martinseeler.cashcow
+package cashcow
 
+import cashcow.Price._
+import org.scalacheck.Prop._
 import org.scalacheck._
-import Prop._
-import com.martinseeler.cashcow.Price._
+import org.scalatest.Matchers
 import shapeless.tag.@@
 
-object PriceSpec extends Properties("Price") {
+object PriceSpec extends Properties("Price") with Matchers {
 
   property("fromInt") = forAll { x: Int =>
     val p: Price = x
@@ -42,13 +43,29 @@ object PriceSpec extends Properties("Price") {
     p.value == x
   }
 
-  property("from Bid to Ask") = forAll { x: Int =>
+  property("from Bid to Ask implicitly") = forAll { x: Int =>
+    """
+      |val a: Price @@ Bid = x
+      |val b: Price @@ Ask = a
+    """.stripMargin shouldNot compile
+    ()
+  }
+
+  property("from Bid to Ask explicitly") = forAll { x: Int =>
     val a: Price @@ Bid = x
     val b: Price @@ Ask = a.toAsk
     b.value == x
   }
 
-  property("from Ask to Bid") = forAll { x: Int =>
+  property("from Ask to Bid implicitly") = forAll { x: Int =>
+    """
+      |val a: Price @@ Ask = x
+      |val b: Price @@ Bid = a
+    """.stripMargin shouldNot compile
+    true
+  }
+
+  property("from Ask to Bid explicitly") = forAll { x: Int =>
     val a: Price @@ Ask = x
     val b: Price @@ Bid = a.toBid
     b.value == x
