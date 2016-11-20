@@ -10,15 +10,18 @@ object Price {
   sealed trait Bid
   val bid = tag[Bid]
   object Bid {
+    val zero: Price @@ Bid = 0.0
     implicit def asPrice[A](x: A)(implicit A: AsPrice[A]): Price @@ Bid = Price.bid(A.asPrice(x))
   }
 
   sealed trait Ask
   val ask = tag[Ask]
   object Ask {
+    val zero: Price @@ Ask = 0.0
     implicit def asPrice[A](x: A)(implicit A: AsPrice[A]): Price @@ Ask = Price.ask(A.asPrice(x))
   }
 
+  val zero: Price = 0.0
   implicit def asPrice[A](x: A)(implicit A: AsPrice[A]): Price = A.asPrice(x)
 
 }
