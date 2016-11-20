@@ -11,4 +11,8 @@ package object cashcow {
     def toBid: Price @@ Bid = Price.bid(wrappedAsk)
   }
 
+  implicit final class CurrencyOps(private val wrappedCurrency: Currency) extends AnyVal {
+    def `/`(counter: Currency): CurrencyPair = CurrencyPair(wrappedCurrency, counter)
+  }
+
 }
