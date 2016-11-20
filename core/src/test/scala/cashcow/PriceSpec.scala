@@ -48,7 +48,7 @@ object PriceSpec extends Properties("Price") with Matchers {
       |val a: Price @@ Bid = x
       |val b: Price @@ Ask = a
     """.stripMargin shouldNot compile
-    ()
+    true
   }
 
   property("from Bid to Ask explicitly") = forAll { x: Int =>
